@@ -1,0 +1,17 @@
+<h2> All Students <h2>
+<ul>
+
+    <% @student.each do |std| %>
+        <li>
+        <%= link_to std.name, student_path(std) %>
+        </li>
+
+        <%= link_to 'Edit' , edit_student_path(std) %>
+        <%= link_to 'Delete' , student_path(std), method: :delete, data:{confirm: "Are you sure?"} %>
+    
+    <% end %>
+
+   
+</ul>
+
+<%= link_to 'Add new Student', new_student_path %>
