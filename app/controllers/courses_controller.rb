@@ -1,11 +1,12 @@
 class CoursesController <ApplicationController
 
+    before_action :set_course, only: %i[ show edit update destroy ]
+
     def index
         @course = Course.all
     end
 
     def show
-        @course = Course.find(params[:id])
     end
 
     def new
@@ -13,36 +14,37 @@ class CoursesController <ApplicationController
     end
 
     def edit
-        @course = Course.find(params[:id])
     end
 
-    def create
+    def create  
         @course = Course.new(course_params)
 
         if @course.save
-            redirect_to courses_path, notice: "New course added!"
+            redirect_to index_courses_path, notice: "New course added!"
         else
+            puts @course.errors.full_messages  
             render :new, status: :unprocessable_entity
         end
     end
 
     def update
-        @course = Course.find(params[:id])
 
         if @course.update(course_params)
-            redirect_to @course, notice: "course updated"
-    
+            redirect_to course_path(@course), notice: "course updated"
+        else
+            puts @course.errors.full_messages  
+            render :edit, status: :unprocessable_entity
         end
     end
 
     def destroy
 
-        @course = Course.find(params[:id])
-
         if @course.destroy
-            redirect_to courses_path, notice: "course deleted"
+            redirect_to index_courses_path, notice: "course deleted"
+        
         else
-            status: :unprocessable_entity
+            puts @course.errors.full_messages  
+            redirect_to index_courses_path, alert: "Failed to delete courses" 
         end
     end
 
@@ -50,6 +52,11 @@ class CoursesController <ApplicationController
 
     def course_params
         params.require(:course).permit(:name, :description)
+    end
+
+
+    def set_course
+        @course = Course.find(params[:id]) 
     end
 
     

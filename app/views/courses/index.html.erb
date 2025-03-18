@@ -1,0 +1,14 @@
+
+
+<h1>All Course</h1>
+
+<div >
+  <% @course.each do |course_| %>
+   
+    <p>
+        <%= link_to course_.name, course_ %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "Add Course", new_course_path %>

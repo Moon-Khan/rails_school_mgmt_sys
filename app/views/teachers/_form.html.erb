@@ -1,0 +1,28 @@
+<% if @teacher.errors.any? %>
+<div style="color: red; border: 1px solid red; padding: 20px;">
+  <h6><%= pluralize(@teacher.errors.count, "error") %> prevented saving:</h6>
+  <ul>
+    <% @teacher.errors.full_messages.each do |msg| %>
+      <h6><li><%= msg %></li></h6>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<%= form_with model: teacher do |form| %>
+    <h4>
+        <%= form.label :name %>
+        <%= form.text_field :name %>
+    </h4>
+
+    <h4> 
+        <%= form.label :contact %>
+        <%= form.number_field :contact %>
+    </h4>
+
+    <h4>
+        <%= form.submit 'Create Teacher' %>
+    </h4>
+
+<% end %>
+

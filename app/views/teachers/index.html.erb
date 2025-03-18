@@ -1,0 +1,12 @@
+<h1>All Teachers</h1>
+
+<div >
+  <% @teacher.each do |teach| %>
+   
+    <p>
+        <%= link_to teach.name, teach %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "Add Teacher", new_teacher_path %>

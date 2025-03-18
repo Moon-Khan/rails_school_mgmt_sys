@@ -1,0 +1,10 @@
+
+<h4> Name: <%= @teacher.name %> </h4>
+<h4> Contact: <%= @teacher.contact %> </h4>
+
+
+<%= link_to "Back", index_teachers_path %>
+<%= link_to "Edit", edit_teacher_path(@teacher) %>
+<p>
+<%= button_to "Delete", @teacher, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+</p>
