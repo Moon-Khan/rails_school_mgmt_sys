@@ -23,6 +23,30 @@
   </head>
 
   <body>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
+    <% if user_signed_in? %>
+      <p>Welcome, <%= current_user.email %>!</p>
+
+        <% if current_user.admin? %>
+          <%= link_to "Admin Dashboard", admin_dashboard_path %>
+        <% end %>
+
+        <% if current_user.teacher? %>
+          <%= link_to "Teacher Dashboard", index_teachers_path %>
+        <% end %>
+
+        <% if current_user.student? %>
+          <%= link_to "Student Dashboard", index_students_path %>
+        <% end %>
+        <%= link_to "Profile", user_profile_path %>
+      
+        <%= link_to "Logout", destroy_user_session_path, data: { "turbo-method": :delete, confirm: "Are you sure you want to log out?" } %>
+
+    <% end %>
+
+
     <%= yield %>
   </body>
 </html>

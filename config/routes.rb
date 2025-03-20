@@ -1,6 +1,27 @@
+  # devise_scope :user do
+  #   get "/users/profile", to: "users/registrations#profile", as: :user_profile
+  #   patch "/users/update_password", to: "users/registrations#update_password", as: :update_user_password
+  #   delete "/users/deactivate", to: "users/registrations#deactivate", as: :deactivate_user
+  # end
+  
+    # devise_for :students
+
+
 Rails.application.routes.draw do
 
-  root "students#index"
+  devise_for :users, controllers: {
+    registrations: "users/registrations",
+ 
+  }
+
+  # Profile route
+  devise_scope :user do
+    get "users/profile", to: "users/registrations#profile", as: :user_profile
+  end
+  
+  # Dashboard routes for roles
+  get "/admin_dashboard", to: "admin#dashboard", as: :admin_dashboard
+
 
   get '/students', to: 'students#index', as: 'index_students'
 

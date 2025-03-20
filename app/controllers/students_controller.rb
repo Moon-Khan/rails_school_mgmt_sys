@@ -1,6 +1,8 @@
     class StudentsController <ApplicationController
         
-        before_action :set_student, only: %i[ show edit update destroy ]
+        # before_action :set_student, only: %i[ show edit update destroy ]
+        before_action :authorize_teacher_or_admin, only: %i[new create edit update destroy]
+
 
         def index
             @student = Student.all
@@ -57,6 +59,12 @@
 
         def set_student
             @student = Student.find(params[:id]) 
+        end
+
+        def authorize_teacher_or_admin
+          unless current_user.admin? || current_user.teacher?
+            redirect_to root_path, alert: "Access denied!"
+          end
         end
 
     end     

@@ -1,0 +1,18 @@
+<h1>Profile</h1>
+
+<p><strong>Email:</strong> <%= @user.email %></p>
+<p><strong>Role:</strong> <%= @user.role.capitalize %></p>
+
+<%= form_for @user, url: user_registration_path, method: :patch do |f| %>
+  <div class="field">
+    <%= f.label :password %>
+    <%= f.password_field :password, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, class: "form-control" %>
+  </div>
+
+  <%= f.submit "Update Profile", class: "btn btn-primary" %>
+<% end %>
